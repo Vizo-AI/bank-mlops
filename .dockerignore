@@ -1,0 +1,7 @@
+# Ignore local virtual-env, raw data, models, git stuff
+bankenv/
+__pycache__/
+*.pyc
+data/
+models/
+.git
