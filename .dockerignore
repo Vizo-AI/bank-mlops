@@ -1,14 +1,16 @@
-# Ignore local virtual-env, raw data, models, git stuff
+# Ignore local virtual-env & temp files
 bankenv/
 __pycache__/
 *.pyc
-+data/
-+!data/processed/
-+!data/processed/prep.joblib
-+models/
-+!models/best_tf_model.keras
+
+# Ignore *raw* data but keep processed artefacts
+data/raw/
+!data/processed/
+!data/processed/prep.joblib
+
+# Ignore everything in models/ *except* the final Keras model
+models/*
+!models/best_tf_model.keras
+
+# Ignore git metadata
 .git
-
-
-
-
