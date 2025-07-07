@@ -41,7 +41,10 @@ with mlflow.start_run():
     history = model.fit(X_train, y_train, epochs=20,
                         batch_size=256, validation_split=0.2,
                         verbose=0)
-
+    
+    # NEW: save in modern .keras format so FastAPI can load it
+    model.save("models/best_tf_model.keras")
+    
     # log model & metrics
     y_pred_prob = model.predict(X_test, verbose=0).flatten()
     auc = roc_auc_score(y_test, y_pred_prob)
