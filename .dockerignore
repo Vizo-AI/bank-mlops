@@ -4,8 +4,6 @@ __pycache__/
 *.pyc
 .git
 
-# Ignore everything by default, then re-include specific items
-**/*
 
 # Re-include ONLY the necessary files and their immediate parent directories
 !models/best_tf_model.keras
