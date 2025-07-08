@@ -15,9 +15,9 @@ models/**
 
 # ---------- NOTHING BELOW THIS LINE SHOULD EVER IGNORE models/ OR data/ ----------
 # Re-include artefacts (+ parent dirs)
-!data/processed/**
-!models/**
+!models/
 !models/best_tf_model.keras
+!data/processed/
 !data/processed/prep.joblib
 # (size filter removed / commented out)
 #*.#=100MB#
