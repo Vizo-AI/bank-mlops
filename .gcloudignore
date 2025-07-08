@@ -5,9 +5,13 @@
 *.pyc
 __pycache__/
 # --- custom rules (match your Docker whitelist) ---
+# ignore everything under data/ and models/
 data/**
+models/**
+
+
 !data/processed/
 !data/processed/prep.joblib
 
-models/**
+!models/
 !models/best_tf_model.keras

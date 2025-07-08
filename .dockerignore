@@ -9,7 +9,7 @@ data/raw/
 !data/processed/prep.joblib
 
 # Ignore everything in models/ *except* the final Keras model
-models/*
+models/**
 !models/best_tf_model.keras
 
 # Ignore git metadata
