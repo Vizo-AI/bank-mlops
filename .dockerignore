@@ -1,6 +1,7 @@
 bankenv/
 __pycache__/
 *.pyc
+.git
 
 data/raw/
 
@@ -11,4 +12,4 @@ models/**                # ignore everything
 data/processed/**        # processed data allowed
 !data/processed/prep.joblib
 
-.git
+
