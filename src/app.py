@@ -3,6 +3,12 @@ from fastapi import FastAPI, HTTPException
 import tensorflow as tf, joblib, numpy as np, pandas as pd, logging, traceback
 from pydantic import BaseModel
 
+
+# ── top of file ───────────────────────────────────────────
+import logging, time
+logging.basicConfig(level=logging.INFO)     # ensure INFO logs appear
+# ---------------------------------------------------------
+
 app = FastAPI()
 print(os.getcwd())  # For debugging purposes, to check the current working directory
 print(os.listdir('data/processed'))
@@ -38,6 +44,7 @@ class Client(BaseModel):
 @app.post("/predict")
 def predict(client: Client):
     try:
+        start = time.time()                     # ⏱️ start timer
         # Build a 1-row DataFrame; columns stay in correct order
         X_df = pd.DataFrame([client.dict()])        # shape (1, 23)
 
@@ -46,6 +53,10 @@ def predict(client: Client):
 
         # Predict default probability
         prob = model.predict(X_processed)[0][0]
+        
+        elapsed = time.time() - start
+        logging.info(f"scored in {elapsed:.3f}s prob={prob:.4f}")
+
         return {"default_probability": float(prob)}
 
     except Exception as e:
