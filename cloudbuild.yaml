@@ -1,0 +1,4 @@
+steps:
+  # Just build the Docker image; replace the tag as you like
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'dummy', '.']
