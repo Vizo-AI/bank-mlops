@@ -9,7 +9,7 @@ models/**                # ignore everything
 !models/                 # re-allow dir
 !models/best_tf_model.keras
 
-data/processed/**        # processed data allowed
+!data/processed/         # processed data allowed
 !data/processed/prep.joblib
 
 
