@@ -1,0 +1,13 @@
+# --- keep Google’s safe defaults ---
+.gcloudignore
+.git
+# Build & IDE noise
+*.pyc
+__pycache__/
+# --- custom rules (match your Docker whitelist) ---
+data/**
+!data/processed/
+!data/processed/prep.joblib
+
+models/**
+!models/best_tf_model.keras
