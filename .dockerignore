@@ -1,16 +1,14 @@
-# Ignore local virtual-env & temp files
 bankenv/
 __pycache__/
 *.pyc
 
-# Ignore *raw* data but keep processed artefacts
 data/raw/
-!data/processed/
-!data/processed/prep.joblib
 
-# Ignore everything in models/ *except* the final Keras model
-models/**
+models/**                # ignore everything
+!models/                 # re-allow dir
 !models/best_tf_model.keras
 
-# Ignore git metadata
+data/processed/**        # processed data allowed
+!data/processed/prep.joblib
+
 .git

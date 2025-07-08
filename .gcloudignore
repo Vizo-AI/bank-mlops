@@ -1,35 +1,23 @@
-# ─────────────────────────────────────────────
-# Google Cloud Build safe defaults
-# ─────────────────────────────────────────────
+# Google defaults (keep)
 .gcloudignore
 .git
 .git/**
 
-# Python / IDE noise
 __pycache__/
 *.py[cod]
 *.pyo
 *.pyd
-
-# Local virtual-envs
 bankenv/
 
-# ─────────────────────────────────────────────
-# Project-specific rules
-# ─────────────────────────────────────────────
-# 1) Ignore everything in data/ and models/ …
+# Ignore everything in these dirs …
 data/**
 models/**
 
-# 2) … but KEEP the processed artefacts required at run-time
-!data/processed/**               # allow the whole processed folder
-!models/**                       # allow the models folder itself
-!models/best_tf_model.keras      # allow the final Keras model file
-!data/processed/prep.joblib      # allow the pre-processing pipeline
-
-# ─────────────────────────────────────────────
-# (Optional) If a “files larger than 100 MB” rule
-# was previously auto-added, comment it out so
-# large model files aren’t stripped:
-# *.#=100MB#
-# ─────────────────────────────────────────────
+# ---------- NOTHING BELOW THIS LINE SHOULD EVER IGNORE models/ OR data/ ----------
+# Re-include artefacts (+ parent dirs)
+!data/processed/**
+!models/**
+!models/best_tf_model.keras
+!data/processed/prep.joblib
+# (size filter removed / commented out)
+#*.#=100MB#
