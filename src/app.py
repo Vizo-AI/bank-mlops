@@ -1,8 +1,11 @@
+import os
 from fastapi import FastAPI, HTTPException
 import tensorflow as tf, joblib, numpy as np, pandas as pd, logging, traceback
 from pydantic import BaseModel
 
 app = FastAPI()
+print(os.getcwd())  # For debugging purposes, to check the current working directory
+print(os.listdir('data/processed'))
 pre = joblib.load('data/processed/prep.joblib')
 model = tf.keras.models.load_model('models/best_tf_model.keras')
 
