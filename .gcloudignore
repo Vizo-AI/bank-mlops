@@ -1,4 +1,3 @@
-# Google defaults (keep)
 .gcloudignore
 .git
 .git/**
@@ -9,15 +8,13 @@ __pycache__/
 *.pyd
 bankenv/
 
-# Ignore everything in these dirs …
-data/**
-models/**
 
-# ---------- NOTHING BELOW THIS LINE SHOULD EVER IGNORE models/ OR data/ ----------
-# Re-include artefacts (+ parent dirs)
-!models/
+# Re-include ONLY the necessary files and their immediate parent directories
 !models/best_tf_model.keras
-!data/processed/
 !data/processed/prep.joblib
-# (size filter removed / commented out)
-#*.#=100MB#
+
+# You might need to explicitly re-include the parent directories if they were completely excluded
+# This is often done by listing the directory itself, then the file.
+!models/
+!data/
+!data/processed/

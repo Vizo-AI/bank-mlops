@@ -1,15 +1,18 @@
+# .dockerignore
 bankenv/
 __pycache__/
 *.pyc
 .git
 
-data/raw/
+# Ignore everything by default, then re-include specific items
+**/*
 
-models/**                # ignore everything
-!models/                 # re-allow dir
+# Re-include ONLY the necessary files and their immediate parent directories
 !models/best_tf_model.keras
-
-!data/processed/         # processed data allowed
 !data/processed/prep.joblib
 
-
+# You might need to explicitly re-include the parent directories if they were completely excluded
+# This is often done by listing the directory itself, then the file.
+!models/
+!data/
+!data/processed/
