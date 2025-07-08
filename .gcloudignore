@@ -6,12 +6,10 @@
 __pycache__/
 # --- custom rules (match your Docker whitelist) ---
 # ignore everything under data/ and models/
-data/**
-models/**
+# Re-include artefacts ***recursively***
+!data/processed/**
+!models/**
 
 
-!data/processed/
 !data/processed/prep.joblib
-
-!models/
 !models/best_tf_model.keras
