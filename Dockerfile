@@ -13,7 +13,7 @@ RUN pip install --no-cache-dir --upgrade pip \
  && pip config set global.disable-pip-version-check true
 
 # ---------- copy project code ----------
-COPY . .
+COPY . /app
 
 # ---------- set environment variables ----------
 ENV PYTHONPATH=/app
