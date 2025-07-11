@@ -2,6 +2,7 @@ import os
 from fastapi import FastAPI, HTTPException
 import tensorflow as tf, joblib, numpy as np, pandas as pd, logging, traceback
 from pydantic import BaseModel
+from monitoring import log_prediction
 
 
 # ── top of file ───────────────────────────────────────────
@@ -52,12 +53,13 @@ def predict(client: Client):
         X_processed = pre.transform(X_df)           # now 2-D array
 
         # Predict default probability
-        prob = model.predict(X_processed)[0][0]
-        
+        prob = float(model.predict(X_processed)[0][0])
+        log_prediction(client.dict(), prob, os.getenv("MODEL_VERSION","1.16"))
+
         elapsed = time.time() - start
         logging.info(f"scored in {elapsed:.3f}s prob={prob:.4f}")
 
-        return {"default_probability": float(prob)}
+        return {"default_probability": prob}
 
     except Exception as e:
         # Print the full stack trace to your uvicorn console for debugging
