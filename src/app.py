@@ -2,7 +2,7 @@ import os
 from fastapi import FastAPI, HTTPException
 import tensorflow as tf, joblib, numpy as np, pandas as pd, logging, traceback
 from pydantic import BaseModel
-from monitoring import log_prediction
+from src.monitoring import log_prediction
 
 
 # ── top of file ───────────────────────────────────────────
