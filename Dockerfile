@@ -16,7 +16,7 @@ RUN pip install --no-cache-dir --upgrade pip \
 COPY . /app
 
 # ---------- entrypoint helper ----------
-COPY /scripts/start_mlflow.sh /app/start_mlflow.sh
+COPY scripts/start_mlflow.sh /app/start_mlflow.sh
 RUN chmod +x /app/start_mlflow.sh   
 
 # ---------- documentation ----------
