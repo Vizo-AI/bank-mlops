@@ -5,3 +5,7 @@ data/
 models/
 .env
 mlflow.db
+
+.DS_Store
+nohup.out
+.ipynb_checkpoints/

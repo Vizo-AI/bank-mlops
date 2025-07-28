@@ -19,6 +19,10 @@ COPY . /app
 COPY /scripts/start_mlflow.sh /app/start_mlflow.sh
 RUN chmod +x /app/start_mlflow.sh   
 
+# ---------- documentation ----------
+# 8080 for FastAPI, 5000 for MLflow UI
+EXPOSE 8080 5000        
+
 # ---------- set environment variables ----------
 ENV PYTHONPATH=/app
 
