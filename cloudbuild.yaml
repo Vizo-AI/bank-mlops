@@ -1,4 +1,11 @@
 steps:
   # Just build the Docker image; replace the tag as you like
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'dummy', '.']
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['builds', 'submit', '--tag', '${_IMAGE}']
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['run', 'deploy', '${_SERVICE}', '--image', '${_IMAGE}', '--region', '${_REGION}', '--platform', 'managed', '--allow-unauthenticated']
+substitutions:
+  _IMAGE: '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPOSITORY}/bank-default-api:$SHORT_SHA'
+  _SERVICE: '<cloud-run-service>'
+  _REGION: '<gcp-region>'
+  _REPOSITORY: '<artifact-registry-repo>'

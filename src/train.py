@@ -27,6 +27,9 @@ y_train = np.load(PROC/'y_train.npy')
 X_test  = np.load(PROC/'X_test.npy')
 y_test  = np.load(PROC/'y_test.npy')
 
+MODELS_DIR = Path('models')
+MODELS_DIR.mkdir(exist_ok=True, parents=True)
+
 with mlflow.start_run():
     model = tf.keras.Sequential([
         tf.keras.layers.Input(shape=(X_train.shape[1],)),
@@ -43,7 +46,7 @@ with mlflow.start_run():
                         verbose=0)
     
     # NEW: save in modern .keras format so FastAPI can load it
-    model.save("models/best_tf_model.keras")
+    model.save(MODELS_DIR / "best_tf_model.keras")
     
     # log model & metrics
     y_pred_prob = model.predict(X_test, verbose=0).flatten()

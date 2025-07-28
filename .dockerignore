@@ -4,13 +4,8 @@ __pycache__/
 *.pyc
 .git
 
-
 # Re-include ONLY the necessary files and their immediate parent directories
-!models/best_tf_model.keras
-!data/processed/prep.joblib
-
-# You might need to explicitly re-include the parent directories if they were completely excluded
-# This is often done by listing the directory itself, then the file.
 !models/
-!data/
+!models/best_tf_model.keras
 !data/processed/
+!data/processed/prep.joblib

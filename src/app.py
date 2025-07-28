@@ -3,6 +3,7 @@ from fastapi import FastAPI, HTTPException
 import tensorflow as tf, joblib, numpy as np, pandas as pd, logging, traceback
 from pydantic import BaseModel
 from src.monitoring import log_prediction
+import requests
 
 
 # ── top of file ───────────────────────────────────────────
@@ -11,10 +12,36 @@ logging.basicConfig(level=logging.INFO)     # ensure INFO logs appear
 # ---------------------------------------------------------
 
 app = FastAPI()
-print(os.getcwd())  # For debugging purposes, to check the current working directory
-print(os.listdir('data/processed'))
-pre = joblib.load('data/processed/prep.joblib')
-model = tf.keras.models.load_model('models/best_tf_model.keras')
+# print(os.getcwd())  # For debugging purposes, to check the current working directory
+# print(os.listdir('data/processed'))
+MODEL_PATH = "models/best_tf_model.keras"
+PREP_PATH = "data/processed/prep.joblib"
+
+
+def download_file(url: str, dest: str) -> None:
+    os.makedirs(os.path.dirname(dest), exist_ok=True)
+    logging.info("Downloading %s -> %s", url, dest)
+    resp = requests.get(url)
+    resp.raise_for_status()
+    with open(dest, "wb") as f:
+        f.write(resp.content)
+
+
+model_url = os.getenv("MODEL_URL")
+prep_url = os.getenv("PREP_URL")
+
+if not os.path.exists(PREP_PATH):
+    if not prep_url:
+        raise RuntimeError("PREP_URL environment variable not set and prep file missing")
+    download_file(prep_url, PREP_PATH)
+
+if not os.path.exists(MODEL_PATH):
+    if not model_url:
+        raise RuntimeError("MODEL_URL environment variable not set and model file missing")
+    download_file(model_url, MODEL_PATH)
+
+pre = joblib.load(PREP_PATH)
+model = tf.keras.models.load_model(MODEL_PATH)
 
 class Client(BaseModel):
     LIMIT_BAL: int

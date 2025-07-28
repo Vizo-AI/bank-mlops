@@ -1,0 +1,131 @@
+2025/07/05 17:07:59 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2025/07/05 17:07:59 INFO mlflow.store.db.utils: Updating database tables
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2025/07/05 17:07:59 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2025/07/05 17:07:59 INFO mlflow.store.db.utils: Updating database tables
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+[2025-07-05 17:07:59 -0400] [71293] [INFO] Starting gunicorn 23.0.0
+[2025-07-05 17:07:59 -0400] [71293] [INFO] Listening at: http://127.0.0.1:5000 (71293)
+[2025-07-05 17:07:59 -0400] [71293] [INFO] Using worker: sync
+[2025-07-05 17:07:59 -0400] [71294] [INFO] Booting worker with pid: 71294
+[2025-07-05 17:07:59 -0400] [71296] [INFO] Booting worker with pid: 71296
+[2025-07-05 17:07:59 -0400] [71297] [INFO] Booting worker with pid: 71297
+[2025-07-05 17:07:59 -0400] [71298] [INFO] Booting worker with pid: 71298
+2025/07/05 17:08:33 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2025/07/05 17:08:33 INFO mlflow.store.db.utils: Updating database tables
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2025/07/05 17:08:33 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2025/07/05 17:08:33 INFO mlflow.store.db.utils: Updating database tables
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2025/07/05 17:08:33 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2025/07/05 17:08:33 INFO mlflow.store.db.utils: Updating database tables
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2025/07/05 17:09:41 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2025/07/05 17:09:41 INFO mlflow.store.db.utils: Updating database tables
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2025/07/07 09:22:12 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2025/07/07 09:22:12 INFO mlflow.store.db.utils: Updating database tables
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2025/07/07 09:24:08 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2025/07/07 09:24:08 INFO mlflow.store.db.utils: Updating database tables
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2025/07/07 09:24:08 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2025/07/07 09:24:08 INFO mlflow.store.db.utils: Updating database tables
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+[2025-07-07 09:29:26 -0400] [71293] [INFO] Handling signal: term
+[2025-07-07 09:29:26 -0400] [71297] [INFO] Worker exiting (pid: 71297)
+[2025-07-07 09:29:26 -0400] [71294] [INFO] Worker exiting (pid: 71294)
+[2025-07-07 09:29:26 -0400] [71298] [INFO] Worker exiting (pid: 71298)
+[2025-07-07 09:29:26 -0400] [71296] [INFO] Worker exiting (pid: 71296)
+[2025-07-07 09:29:27 -0400] [71293] [INFO] Shutting down: Master
+2025/07/07 09:30:13 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2025/07/07 09:30:13 INFO mlflow.store.db.utils: Updating database tables
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2025/07/07 09:30:13 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2025/07/07 09:30:13 INFO mlflow.store.db.utils: Updating database tables
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+[2025-07-07 09:30:13 -0400] [53288] [INFO] Starting gunicorn 23.0.0
+[2025-07-07 09:30:13 -0400] [53288] [INFO] Listening at: http://127.0.0.1:5000 (53288)
+[2025-07-07 09:30:13 -0400] [53288] [INFO] Using worker: sync
+[2025-07-07 09:30:13 -0400] [53289] [INFO] Booting worker with pid: 53289
+[2025-07-07 09:30:13 -0400] [53302] [INFO] Booting worker with pid: 53302
+[2025-07-07 09:30:13 -0400] [53303] [INFO] Booting worker with pid: 53303
+[2025-07-07 09:30:13 -0400] [53304] [INFO] Booting worker with pid: 53304
+[2025-07-07 09:30:43 -0400] [53303] [WARNING] Invalid request from ip=127.0.0.1: Invalid HTTP method: "\x16\x03\x01\x06À\x01\x00\x06¼\x03\x03\x9ep\\¬kØÇ\x95ÉñHH\nñ!¬Ëo\x94ªBS\x02'¢l\x7f°t5\x91²"
+2025/07/07 09:44:40 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2025/07/07 09:44:40 INFO mlflow.store.db.utils: Updating database tables
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2025/07/07 09:44:40 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2025/07/07 09:44:40 INFO mlflow.store.db.utils: Updating database tables
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2025/07/07 09:44:40 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2025/07/07 09:44:40 INFO mlflow.store.db.utils: Updating database tables
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2025/07/07 09:46:02 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2025/07/07 09:46:02 INFO mlflow.store.db.utils: Updating database tables
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2025/07/07 09:46:16 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2025/07/07 09:46:16 INFO mlflow.store.db.utils: Updating database tables
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2025/07/07 09:46:21 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2025/07/07 09:46:21 INFO mlflow.store.db.utils: Updating database tables
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2025/07/07 09:46:41 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2025/07/07 09:46:41 INFO mlflow.store.db.utils: Updating database tables
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2025/07/07 09:46:44 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2025/07/07 09:46:44 INFO mlflow.store.db.utils: Updating database tables
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+[2025-07-07 09:54:52 -0400] [53289] [INFO] Worker exiting (pid: 53289)
+[2025-07-07 09:54:52 -0400] [70003] [INFO] Booting worker with pid: 70003
+2025/07/07 09:54:54 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2025/07/07 09:54:54 INFO mlflow.store.db.utils: Updating database tables
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+[2025-07-07 09:55:03 -0400] [53288] [INFO] Handling signal: term
+[2025-07-07 09:55:03 -0400] [70003] [INFO] Worker exiting (pid: 70003)
+[2025-07-07 09:55:03 -0400] [53304] [INFO] Worker exiting (pid: 53304)
+[2025-07-07 09:55:03 -0400] [53303] [INFO] Worker exiting (pid: 53303)
+[2025-07-07 09:55:03 -0400] [53302] [INFO] Worker exiting (pid: 53302)
+[2025-07-07 09:55:03 -0400] [53288] [INFO] Shutting down: Master

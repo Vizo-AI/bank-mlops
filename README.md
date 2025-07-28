@@ -80,13 +80,49 @@ docker run -p 8080:8080 bank-default-api:local
 
 
 ## 5 • CI/CD – one-click build
-Every push to main triggers GitHub Actions:
+Each push to main can start the Cloud Build pipeline via **GitHub Actions** or a
+**Cloud Build trigger**:
 
 1. Run pytest
-2. Build Docker image
-3. Publish to GCP Artifact Registry (via Cloud Build)
+2. Invoke Cloud Build to build the image and deploy to Cloud Run
 
-See .github/workflows/ci.yml for the job definition.
+
+GitHub Actions simply calls:
+
+```bash
+gcloud builds submit --config cloudbuild.yaml
+```
+
+Alternatively create a Cloud Build trigger that references `cloudbuild.yaml` so
+the same pipeline runs automatically on commits.
+
+See `.github/workflows/ci.yml` for the workflow skeleton.
+
+### GitHub Secrets
+
+Add these secrets in your GitHub repo so the workflow can deploy:
+
+- `GCP_SA_KEY` – JSON service account key with Cloud Run & Artifact Registry permissions.
+- `PROJECT_ID` – GCP project ID.
+- `REGION` – region for Cloud Run (e.g. `us-central1`).
+- `SERVICE` – Cloud Run service name.
+- `REPO` – Artifact Registry repo name.
+
+### How it works
+
+On every push to `main` the pipeline:
+1. Builds the Docker image with Cloud Build.
+2. Pushes it to `REGION-docker.pkg.dev/$PROJECT_ID/$REPO/$SERVICE:$GITHUB_SHA`.
+3. Deploys the new image to Cloud Run `$SERVICE`.
+
+Example log extract from a successful run:
+
+```text
+Deploying container to Cloud Run service [bank-api] in project [mlops-demo] region [us-central1]
+✔ Deploying... done
+└─ https://bank-api-xyz-uc.a.run.app
+```
+
 
 
 ## 6 • Live Demo 🌐
@@ -113,6 +149,9 @@ alert.
 5. CI security – Trivy scan in GitHub Actions
 
 ## 9 • License
+
+This project is licensed under the **MIT License**.
+See the [LICENSE](LICENSE) file for details.
 
 
 ---

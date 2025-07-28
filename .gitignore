@@ -4,7 +4,4 @@ __pycache__/
 data/
 models/
 .env
-
-# --- exceptions (whitelist) ---
-!data/processed/            # allow the folder itself
-!data/processed/*.joblib    # allow the joblib files inside
+mlflow.db
