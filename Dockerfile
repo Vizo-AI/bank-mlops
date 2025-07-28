@@ -15,6 +15,10 @@ RUN pip install --no-cache-dir --upgrade pip \
 # ---------- copy project code ----------
 COPY . /app
 
+# ---------- entrypoint helper ----------
+COPY /scripts/start_mlflow.sh /app/start_mlflow.sh
+RUN chmod +x /app/start_mlflow.sh   
+
 # ---------- set environment variables ----------
 ENV PYTHONPATH=/app
 
