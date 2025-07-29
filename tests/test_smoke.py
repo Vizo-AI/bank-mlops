@@ -2,7 +2,7 @@
 import subprocess, pathlib, sys
 
 def test_script_exists_and_executable():
-    script = pathlib.Path("start_mlflow.sh")
+    script = pathlib.Path("scripts/start_mlflow.sh")
     assert script.exists()
     assert script.stat().st_mode & 0o111  # any executable bit
 

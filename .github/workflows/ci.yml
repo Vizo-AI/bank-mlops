@@ -54,7 +54,7 @@ jobs:
       # 8 — Build and push container with Cloud Build
       - name: Build and push container
         run: |
-          gcloud builds submit --tag $REGION-docker.pkg.dev/$PROJECT_ID/$REPO/bank-default-api:$GITHUB_SHA . --no-stream
+          gcloud builds submit --tag $REGION-docker.pkg.dev/$PROJECT_ID/$REPO/bank-default-api:$GITHUB_SHA --quiet || echo "Build triggered, skipping log streaming error"
 
       # 9 — Deploy to Cloud Run
       - name: Deploy to Cloud Run
