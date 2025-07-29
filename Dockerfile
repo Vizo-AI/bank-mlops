@@ -1,5 +1,5 @@
 # ----------- Stage 1: Build layer with dependencies ----------- 
-FROM python:3.11-slim AS build
+FROM python:3.10-slim AS build
 
 # Set working directory
 WORKDIR /app
@@ -14,18 +14,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY requirements.txt .
 
 # Install dependencies
-RUN pip install --no-cache-dir --upgrade pip \
-    && pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir --upgrade pip && pip install --no-cache-dir -r requirements.txt
 
 
 # ----------- Stage 2: Runtime layer (lighter) ----------- 
-FROM python:3.11-slim
+FROM python:3.10-slim
 
 # Set working directory
 WORKDIR /app
 
 # Copy installed Python packages from build stage
-COPY --from=build /usr/local/lib/python3.11 /usr/local/lib/python3.11
+COPY --from=build /usr/local/lib/python3.10 /usr/local/lib/python3.10
 COPY --from=build /usr/local/bin /usr/local/bin
 
 # Copy your application code (no models baked into image)
