@@ -68,6 +68,9 @@ class Client(BaseModel):
     PAY_AMT5: int
     PAY_AMT6: int
 
+@app.get("/")
+def read_root():
+    return {"message": "API is running"}
 
 @app.post("/predict")
 def predict(client: Client):

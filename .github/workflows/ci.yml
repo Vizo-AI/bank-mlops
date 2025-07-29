@@ -3,8 +3,13 @@ name: CI
 on:
   push:
     branches: [main]
-  pull_request:          # optional but recommended
+  pull_request:
     branches: [main]
+  workflow_dispatch:
+    inputs:
+      reupload_model:
+        description: 'Force re-upload model (yes/no)'
+        default: 'no'
 
 jobs:
   test-build:
@@ -16,47 +21,96 @@ jobs:
       REPO: ${{ secrets.REPO }}
 
     steps:
-      # 1 — Check out repo
+      # 1 — Check out repo
       - uses: actions/checkout@v4
 
-      # 2 — Set up Python for unit tests
+      # 2 — Set up Python for unit tests
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      # 3 — Install Python dependencies & pytest
+      # 3 — Install Python dependencies & pytest
       - name: Install deps
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install pytest
 
-      # 4 — Run unit tests (if you have none yet, it still passes)
+      # 4 — Run unit tests
       - name: Run unit tests
         run: pytest -q
 
-      # 5 — Build Docker image (self-contained)
-      - name: Build Docker image
-        run: docker build -t bank-default-api:${{ github.sha }} .
-
-      # 6 — Authenticate to Google Cloud
+      # 5 — Authenticate to Google Cloud
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
 
-      # 7 — Set up gcloud CLI
+      # 6 — Set up gcloud CLI
       - name: Set up gcloud
         uses: google-github-actions/setup-gcloud@v2
         with:
           project_id: ${{ env.PROJECT_ID }}
 
-      # 8 — Build and push container with Cloud Build
-      - name: Build and push container
+      # 7 — Check model hash (only if file exists locally)
+      - name: Calculate local model hash
+        id: hash
+        run: |
+          if [ -f models/best_tf_model.keras ]; then
+            HASH_LOCAL=$(sha256sum models/best_tf_model.keras | awk '{print $1}')
+            echo "HASH_LOCAL=$HASH_LOCAL" >> $GITHUB_ENV
+          else
+            echo "HASH_LOCAL=none" >> $GITHUB_ENV
+          fi
+
+      # 8 — Get remote model hash (ignore if missing)
+      - name: Get remote model hash
+        id: remote
+        run: |
+          gsutil cp gs://bank-mlops-models/best_tf_model.keras remote_model.keras || echo "No remote model"
+          if [ -f remote_model.keras ]; then
+            HASH_REMOTE=$(sha256sum remote_model.keras | awk '{print $1}')
+            echo "HASH_REMOTE=$HASH_REMOTE" >> $GITHUB_ENV
+          else
+            echo "HASH_REMOTE=none" >> $GITHUB_ENV
+          fi
+
+      # 9 — Conditional model upload (manual override or hash mismatch)
+      - name: Conditional model upload
+        if: github.event.inputs.reupload_model == 'yes' || env.HASH_LOCAL != env.HASH_REMOTE
+        run: |
+          echo "Uploading model to GCS..."
+          gsutil cp models/best_tf_model.keras gs://bank-mlops-models/
+
+      # 10 — Set up Docker Buildx (needed for caching)
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      # 11 — Build Docker image using cache (faster builds)
+      - name: Build Docker image with cache
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: false
+          tags: bank-default-api:${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      # 12 — Build and push container with Cloud Build
+      - name: Build and push container to GCP
         run: |
           gcloud builds submit --tag $REGION-docker.pkg.dev/$PROJECT_ID/$REPO/bank-default-api:$GITHUB_SHA --quiet || echo "Build triggered, skipping log streaming error"
 
-      # 9 — Deploy to Cloud Run
+      # 13 — Deploy to Cloud Run
       - name: Deploy to Cloud Run
         run: |
-          gcloud run deploy $SERVICE --image=$REGION-docker.pkg.dev/$PROJECT_ID/$REPO/bank-default-api:$GITHUB_SHA --region=$REGION --platform=managed --memory=1Gi --cpu=2 --timeout=600s --allow-unauthenticated
+          gcloud run deploy $SERVICE \
+            --image=$REGION-docker.pkg.dev/$PROJECT_ID/$REPO/bank-default-api:$GITHUB_SHA \
+            --region=$REGION \
+            --platform=managed \
+            --memory=2Gi \
+            --cpu=2 \
+            --timeout=600s \
+            --allow-unauthenticated \
+            --update-env-vars MODEL_URL="https://storage.googleapis.com/bank-mlops-models/best_tf_model.keras"
