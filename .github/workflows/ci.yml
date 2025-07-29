@@ -52,41 +52,45 @@ jobs:
         with:
           project_id: ${{ env.PROJECT_ID }}
 
-      # 7 — Check model hash (only if file exists locally)
+      # 7 — Calculate local model hash (if exists)
       - name: Calculate local model hash
         id: hash
         run: |
           if [ -f models/best_tf_model.keras ]; then
             HASH_LOCAL=$(sha256sum models/best_tf_model.keras | awk '{print $1}')
-            echo "HASH_LOCAL=$HASH_LOCAL" >> $GITHUB_ENV
+            echo "hash_local=$HASH_LOCAL" >> $GITHUB_OUTPUT
           else
-            echo "HASH_LOCAL=none" >> $GITHUB_ENV
+            echo "hash_local=none" >> $GITHUB_OUTPUT
           fi
 
-      # 8 — Get remote model hash (ignore if missing)
+      # 8 — Get remote model hash (if exists)
       - name: Get remote model hash
         id: remote
         run: |
           gsutil cp gs://bank-mlops-models/best_tf_model.keras remote_model.keras || echo "No remote model"
           if [ -f remote_model.keras ]; then
             HASH_REMOTE=$(sha256sum remote_model.keras | awk '{print $1}')
-            echo "HASH_REMOTE=$HASH_REMOTE" >> $GITHUB_ENV
+            echo "hash_remote=$HASH_REMOTE" >> $GITHUB_OUTPUT
           else
-            echo "HASH_REMOTE=none" >> $GITHUB_ENV
+            echo "hash_remote=none" >> $GITHUB_OUTPUT
           fi
 
-      # 9 — Conditional model upload (manual override or hash mismatch)
+      # 9 — Conditional model upload
       - name: Conditional model upload
-        if: github.event.inputs.reupload_model == 'yes' || env.HASH_LOCAL != env.HASH_REMOTE
+        if: ${{ github.event.inputs.reupload_model == 'yes' || steps.hash.outputs.hash_local != steps.remote.outputs.hash_remote }}
         run: |
           echo "Uploading model to GCS..."
-          gsutil cp models/best_tf_model.keras gs://bank-mlops-models/
+          if [ -f models/best_tf_model.keras ]; then
+            gsutil cp models/best_tf_model.keras gs://bank-mlops-models/
+          else
+            echo "No local model to upload, skipping."
+          fi
 
-      # 10 — Set up Docker Buildx (needed for caching)
+      # 10 — Set up Docker Buildx
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      # 11 — Build Docker image using cache (faster builds)
+      # 11 — Build Docker image using cache
       - name: Build Docker image with cache
         uses: docker/build-push-action@v5
         with:
@@ -97,7 +101,7 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-      # 12 — Build and push container with Cloud Build
+      # 12 — Build and push container to GCP
       - name: Build and push container to GCP
         run: |
           gcloud builds submit --tag $REGION-docker.pkg.dev/$PROJECT_ID/$REPO/bank-default-api:$GITHUB_SHA --quiet || echo "Build triggered, skipping log streaming error"
