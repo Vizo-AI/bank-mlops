@@ -5,6 +5,7 @@ data/
 models/
 .env
 mlflow.db
+key.json
 
 .DS_Store
 nohup.out

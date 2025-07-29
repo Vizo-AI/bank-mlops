@@ -3,6 +3,7 @@ bankenv/
 __pycache__/
 *.pyc
 .git
+key.json
 
 # Re-include ONLY the necessary files and their immediate parent directories
 !models/
