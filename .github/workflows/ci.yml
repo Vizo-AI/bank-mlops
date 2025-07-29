@@ -59,4 +59,4 @@ jobs:
       # 9 — Deploy to Cloud Run
       - name: Deploy to Cloud Run
         run: |
-          gcloud run deploy $SERVICE --image=$REGION-docker.pkg.dev/$PROJECT_ID/$REPO/bank-default-api:$GITHUB_SHA --region=$REGION --platform=managed --memory=1Gi --cpu=2 --allow-unauthenticated
+          gcloud run deploy $SERVICE --image=$REGION-docker.pkg.dev/$PROJECT_ID/$REPO/bank-default-api:$GITHUB_SHA --region=$REGION --platform=managed --memory=1Gi --cpu=2 --timeout=600s --allow-unauthenticated
