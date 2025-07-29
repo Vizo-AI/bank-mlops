@@ -27,8 +27,8 @@ def download_file(url: str, dest: str) -> None:
         f.write(resp.content)
 
 
-model_url = os.getenv("MODEL_URL")
-prep_url = os.getenv("PREP_URL")
+model_url = os.getenv("MODEL_URL", "gs://bank-mlops-models/best_tf_model.keras")
+prep_url = os.getenv("PREP_URL", "gs://bank-mlops-models/prep.joblib")
 
 if not os.path.exists(PREP_PATH):
     if not prep_url:

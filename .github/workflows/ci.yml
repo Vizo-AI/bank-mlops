@@ -117,4 +117,4 @@ jobs:
             --cpu=2 \
             --timeout=600s \
             --allow-unauthenticated \
-            --update-env-vars MODEL_URL="https://storage.googleapis.com/bank-mlops-models/best_tf_model.keras"
+            --update-env-vars MODEL_URL="https://storage.googleapis.com/bank-mlops-models/best_tf_model.keras",PREP_URL="https://storage.googleapis.com/bank-mlops-models/prep.joblib"

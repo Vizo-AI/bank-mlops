@@ -31,7 +31,6 @@ COPY --from=build /usr/local/bin /usr/local/bin
 # Copy your application code (no models baked into image)
 COPY src/ ./src/
 COPY scripts/start_mlflow.sh ./scripts/start_mlflow.sh
-COPY data/processed/prep.joblib ./data/processed/prep.joblib
 
 # Make script executable
 RUN chmod +x ./scripts/start_mlflow.sh
